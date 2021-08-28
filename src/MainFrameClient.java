@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -27,11 +28,20 @@ public class MainFrameClient extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            //System.out.println(Lector.getText());
+            System.out.println(Lector.getText());
             try {
                 Socket misocket=new Socket("192.168.0.14",9999);
+
+                DataOutputStream Salida=new DataOutputStream(misocket.getOutputStream());
+                Salida.writeUTF(Lector.getText());
+
+                Salida.close();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
+                System.out.println(ex.getMessage());
+                
+
             }
 
         }
