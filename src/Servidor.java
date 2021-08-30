@@ -12,11 +12,11 @@ import java.net.Socket;
  *
  */
 
-public class Servidor extends JFrame implements Runnable{
+public class Servidor extends JFrame implements Runnable{// variables usadas en la interfa<
     private JPanel Principal2;
     private JTextArea textArea1;
 
-    public  Servidor() {
+    public  Servidor() {// se establecen los lugares de donde va la interfaz
         setContentPane(Principal2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -39,8 +39,8 @@ public class Servidor extends JFrame implements Runnable{
     @Override//ESCUCHA
     public void run() {
         try {
-            ServerSocket servidor = new ServerSocket(8080);
-            String nick, mensaje;
+            ServerSocket servidor = new ServerSocket(8080);//Creacion del servidor
+            String nick, mensaje;//Varialbes usadas de la interfaz cliente
             Paquete_Cliente paquete_recibido;
 
             while (true) {
@@ -49,12 +49,12 @@ public class Servidor extends JFrame implements Runnable{
                 paquete_recibido=(Paquete_Cliente) paquete_datos.readObject();
                 nick=paquete_recibido.getNick();
                 mensaje=paquete_recibido.getMensaje();
-                textArea1.append("\n"+ nick+": "+mensaje);
-                Socket enviaDestinatario=new Socket("LocalHost",9090);
+                textArea1.append("\n"+ nick+": "+mensaje);//imprime en la pantalla de texto
+                Socket enviaDestinatario=new Socket("LocalHost",9090);//direccion del socket del chat
                 ObjectOutputStream paqueteReenvio=new ObjectOutputStream(enviaDestinatario.getOutputStream());
                 paqueteReenvio.writeObject(paquete_recibido);
-                enviaDestinatario.close();
-                paqueteReenvio.close();
+                enviaDestinatario.close();//cierra la funcion
+                paqueteReenvio.close();//cierra la funcion
 
                 misocket.close();
 
