@@ -18,14 +18,10 @@ public class Cliente extends JFrame implements Runnable{
     private JPanel Principal;
     private JTextArea textArea2;
     private JTextField usuario;
-    private JTextField Porcentaje;
-    private JTextField Producto;
-    private JTextField Peso;
-
-
-
-
-
+    private JTextField text1;
+    private JTextField text2;
+    private JTextField text3;
+    private JButton calcularButton;
 
 
     public  Cliente() {
@@ -41,7 +37,23 @@ public class Cliente extends JFrame implements Runnable{
         hilo.start();
 
 
-
+        calcularButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String Porcentaje= new String();
+                Porcentaje=text1.getText();
+                double P = Double.parseDouble(Porcentaje);
+                String Producto= new String();
+                Producto=text2.getText();
+                double Pro = Double.parseDouble(Producto);
+                String Peso= new String();
+                Peso=text3.getText();
+                double Pes = Double.parseDouble(Peso);
+                double R= (Pro*P/100)+(Pes*0.15);
+                System.out.println(R);
+                textArea2.append(String.valueOf(R));
+            }
+        });
     }
 
 
